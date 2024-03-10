@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breast Cancer Detection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            color: #ff69b4;
+            text-align: center;
+            padding-top: 20px;
+        }
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+        }
+        select, input[type="file"], input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        select {
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        input[type="submit"] {
+            background-color: #ff69b4;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #d3578d;
+        }
+        #image-preview {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Breast Cancer Detection</h1>
+    <form action="/predict" method="post" enctype="multipart/form-data">
+        <label for="model_type">Select Model:</label>
+        <select name="model_type" id="model_type">
+            <option value="sgd">Stochastic Gradient Descent Classifier</option>
+            <option value="svm">Support Vector Machine Classifier</option>
+            <option value="knn">KNeighborsClassifier</option>
+            <option value="voting">VotingClassifier</option>
+            <option value="ann">ANN</option>
+            <option value="efficientnet">EfficientNET</option>
+            <option value="cnn">CNN</option>
+            <option value="cnn_elm">Hybrid of CNN and ELM</option>
+        </select>
+        <br>
+        <input type="file" name="image" accept="image/*" onchange="previewImage(event)">
+        <br>
+        <img id="image-preview" src="#" alt="Image Preview">
+        <br>
+        <input type="submit" value="Predict">
+    </form>
+
+    <script>
+        function previewImage(event) {
+            var preview = document.getElementById('image-preview');
+            preview.style.display = 'block';
+            preview.src = URL.createObjectURL(event.target.files[0]);
+        }
+    </script>
+</body>
+</html>
